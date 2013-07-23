@@ -1,0 +1,39 @@
+Survivor class: The main method
+State class methods:
+	String GetOpeningPhrase(); returns the OPENING_PHRASE for the state (obsolete)
+	String checkKeyWords(String s); Checks for key words which cause a change of state.  Returns the state that it must be changed to or an empty string
+		if no state change is necessary
+	String generateOutput(String s); Generates the output for the current state and the user input.  Generates the string to change the state if a state change is
+		necessary, or continues to call the generateStateOutput method.
+	boolean question(String s); returns true if the prameter s is a question and false otherwise
+	boolean negated(String s); returns true if there is a negation word (not, don't etc.) and false otherwise
+	String generateStateOutpt(String s, boolean q); Determines exactly what should be output.  Each method has its own way of doing this. The boolean parameter
+		is true if the user's input is an inquiry and false otherwise
+	String answerQuestion(String s); If the input is an inquiry, this method is called to generate the output.  In the case where no output can be found, the
+		user input is sent to the inputNotQuestion(String s) method to be processed.
+	String getInquiry(String s); return the type of inquiry this is ("What", "why", "how" etc.)
+	String getInquiryTopic(String s); return the topic of the inquiry(the inquiry could be "why were you at the beach?" where the topic is "beach" and the inquiry
+		is "why")
+	String inputNotQuestion(String s); Returns the output if the topic is not a question.  This method checks the various key words stored in the arrays for that
+		state.  If no output can be found, the default phrase for that state is returned.
+	String getDefaultPhrase(); returns the default phrase for the current state
+	String getTerminalPhrase(); returns the terminal prhase for the current state.  This method is only called by the Survivor.java class after 30 turns.
+	String removePunctuation(String s); the input parameter with all punctuation and anything after that punctuation removed.  This is done so that the program
+		does not confuse words like "beach" and "beach?", for example.
+
+General Belief class methods
+	All methods inherited from State
+General Disbelief class methods
+	All methods inherited from State
+Help State class methods
+	All methods inherited from State
+Comfort State class methods
+	All methods inherited from State
+Crazy state class methods
+	All methods inherited from State
+General Disbelief class methods
+	String handlePrank(); decides whether to handle an input containing the key word "prank" (and other similar word) by generating the output itself (the user
+		believes somebody pulled a prank on it) or by sending it to "Lying" state (the user thinks the program is pulling a prank on him)
+Lying state class methods
+	String handlePrank(); Decides whether to handle an input containing the key word "prank" (and other similar words) by generating the output itself (the user
+		believes teh program is pulling a prank on him) or by sending it to the General Disbelief State (the user thinks somebody pulled a prank on the 		program)
