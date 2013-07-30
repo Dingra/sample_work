@@ -1,0 +1,16 @@
+
+
+public class TestTwoFourTree {
+
+	
+	
+	
+	/**
+	 * Test the 'add' method
+	 */
+	@Test
+	public void testAdd(){
+		
+	}
+	
+}

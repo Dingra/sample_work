@@ -1,0 +1,57 @@
+!SESSION 2013-07-28 16:19:20.369 -----------------------------------------------
+eclipse.buildId=M20110210-1200
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_CA
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.jdt.ui 4 2 2013-07-28 17:36:40.104
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.jdt.internal.corext.refactoring.generics.InferTypeArgumentsTCModel.getElementVariable(InferTypeArgumentsTCModel.java:806)
+	at org.eclipse.jdt.internal.corext.refactoring.generics.InferTypeArgumentsConstraintCreator.doVisitMethodInvocationArguments(InferTypeArgumentsConstraintCreator.java:623)
+	at org.eclipse.jdt.internal.corext.refactoring.generics.InferTypeArgumentsConstraintCreator.endVisit(InferTypeArgumentsConstraintCreator.java:476)
+	at org.eclipse.jdt.core.dom.MethodInvocation.accept0(MethodInvocation.java:247)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2480)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChild(ASTNode.java:2528)
+	at org.eclipse.jdt.core.dom.InfixExpression.accept0(InfixExpression.java:367)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2480)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChild(ASTNode.java:2528)
+	at org.eclipse.jdt.core.dom.IfStatement.accept0(IfStatement.java:189)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2480)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChildren(ASTNode.java:2551)
+	at org.eclipse.jdt.core.dom.Block.accept0(Block.java:136)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2480)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChild(ASTNode.java:2528)
+	at org.eclipse.jdt.core.dom.ForStatement.accept0(ForStatement.java:229)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2480)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChildren(ASTNode.java:2551)
+	at org.eclipse.jdt.core.dom.Block.accept0(Block.java:136)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2480)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChild(ASTNode.java:2528)
+	at org.eclipse.jdt.core.dom.MethodDeclaration.accept0(MethodDeclaration.java:504)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2480)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChildren(ASTNode.java:2551)
+	at org.eclipse.jdt.core.dom.TypeDeclaration.accept0(TypeDeclaration.java:484)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2480)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChildren(ASTNode.java:2551)
+	at org.eclipse.jdt.core.dom.CompilationUnit.accept0(CompilationUnit.java:219)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2480)
+	at org.eclipse.jdt.internal.corext.refactoring.generics.InferTypeArgumentsRefactoring$2.run(InferTypeArgumentsRefactoring.java:204)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jdt.internal.corext.refactoring.generics.InferTypeArgumentsRefactoring$1.acceptAST(InferTypeArgumentsRefactoring.java:193)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.resolve(CompilationUnitResolver.java:883)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.resolve(CompilationUnitResolver.java:577)
+	at org.eclipse.jdt.core.dom.ASTParser.createASTs(ASTParser.java:888)
+	at org.eclipse.jdt.internal.corext.refactoring.generics.InferTypeArgumentsRefactoring.checkFinalConditions(InferTypeArgumentsRefactoring.java:189)
+	at org.eclipse.ltk.core.refactoring.CheckConditionsOperation.run(CheckConditionsOperation.java:85)
+	at org.eclipse.ltk.core.refactoring.CreateChangeOperation.run(CreateChangeOperation.java:121)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.run(PerformChangeOperation.java:209)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:1975)
+	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:87)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2013-07-28 17:36:40.207
+!MESSAGE Internal error while inferring type arguments in 'TwoFourTree.java'.

@@ -1,0 +1,8 @@
+
+public interface TwoFour {
+	
+	public void add (int key, String value);//Add an item with a certain key and value
+	public void delete (int key);//Delete an item by its key
+	public TreeEntry search (int key);//Find and return an item by its key
+
+}

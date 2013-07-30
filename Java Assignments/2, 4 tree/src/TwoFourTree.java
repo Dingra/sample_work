@@ -1,0 +1,186 @@
+import java.util.ArrayList;
+/**
+ * 
+ * @author Drew Ingram
+ *
+ * @param <K> The key of an entry
+ * @param <V> The value in the entry
+ * 
+ * Some definitions...
+ * Entry: An item that is placed in the tree.  It can be any object and has a key
+ * and a value
+ * 
+ * Node: A group of 1, 2 or 3 entries.  Each node also has 2, 3 or 4 child nodes, one more
+ * child node than entries
+ */
+
+public class TwoFourTree<K extends Comparable<K>,V>{
+	
+	TreeNode<K,V> root;
+	
+	//Initialises an empty 2,4 tree
+	public TwoFourTree(){
+		root = null;;
+	}
+	
+	//Splits an overflowing node into a 2 node and a 3 node
+	public void split(TreeNode<K,V> n){
+
+		TreeNode<K,V> node = n;
+		TreeEntry<K,V> temp = node.entries.get(2);
+		
+		if(node == root){
+			TreeNode<K,V> newNode = new TreeNode<K,V>(temp);
+			node.parent = newNode;
+			newNode.children.add(node);
+			
+		}
+		
+		else inject(temp, node.parent);
+		
+		divide(node);
+		
+		if(node.parent.overflow())
+			split(node.parent);
+	}
+	
+	//Attempts to add an entry into a node. If it is successful, it will return true
+	//and false otherwise
+	public boolean inject(TreeEntry<K,V> entry, TreeNode<K,V> node){
+		boolean success = false;
+		
+		for(int i = 0; i <= node.entries.size(); i++){//Check each entry
+			if(entry.key.compareTo(node.entries.get(i).key) < 0){//If it is less
+				if(node.children.size() == 0){//If there are children, go deeper
+					node.entries.add(i, entry);//otherwise, add it
+					success = true;//To show that it was added
+					node.children.add(null);
+					
+				}
+			}
+		}
+		return success;
+	}
+	
+	
+	//Finds the appropriate place to insert a new child during a split
+	//and inserts it the child there
+	public void injectChild(TreeNode<K,V> n){
+		TreeNode<K,V> node = n;
+		ArrayList<TreeEntry<K,V>> children = node.parent.entries;
+		
+		int count = 1;
+		
+		while (count < children.size()){
+			if(node.entries.get(0).key.compareTo(children.get(count).key) < 0)
+				break;
+			count ++;
+		}
+		node.parent.children.add(count, node);
+	}
+		
+	
+	
+	//Breaks an overloading 5 node into a 3 node and a 2 node
+	public void divide(TreeNode<K,V> n){
+		TreeNode<K,V> node = n;
+		TreeNode<K,V> newNode = new TreeNode<K,V>(node.entries.get(3),null,null);
+		
+		newNode.parent = node.parent;
+		node.entries.remove(3);
+		
+		injectChild(newNode);
+	}
+	
+	//Insert a node into the tree
+	public void insert(TreeEntry<K,V> entry){
+		
+		if(isEmpty()){//If the tree is empty, this will be the new root
+			root = new TreeNode<K,V>(entry);
+		}
+			
+		else{
+			TreeNode<K,V> currentNode = root;
+			boolean success = inject(entry, currentNode);
+			
+			if(!success){
+				iterate(currentNode, entry);		
+				}
+			}
+		}
+		
+	
+	public void iterate(TreeNode<K,V> n, TreeEntry<K,V> entry){
+		
+		TreeNode<K,V> node = n;
+			int count = 0;
+			while(count < n.children.size()){
+				if(entry.key.compareTo(n.entries.get(count).key) < 0){
+					node = node.children.get(count);
+					break;
+				}
+			}
+		}
+	
+	//Returns true if the tree is empty and false otherwise
+	public boolean isEmpty(){
+		if(root.entries == null)
+			return true;
+		else return false;
+	}
+
+
+	public TreeEntry search(K key) {
+		TreeNode<K, V> current = root;
+		TreeEntry<K, V> check = null;
+		while(current != null){//While there are still more children that can be checked
+			check = findEntryInNode(key, current);
+			if(check != null)//It has been found
+				break;
+			int i = findChild(key, current);
+			current = current.getChildren().get(i);//Go to the child node that
+													//may contain the entry with
+													//the key being searched for
+		}
+		return check;
+	}
+	
+	/**
+	 * Search a node to find the position of the child node which
+	 * may contain the key being searched for.
+	 * @param key: The key being searched for
+	 * 
+	 * Return the position of the node to be searched next
+	 */
+	public int findChild(K key, TreeNode current){
+		ArrayList<TreeEntry<K,V>> entries = current.getEntries();
+		int i;
+		for(i = 0; i < entries.size(); i ++){
+			if(entries.get(i).getKey().compareTo(key) < 0)//If it is less, must return
+				return i;								//at this point to search the children
+			else if (entries.get(i).getKey().compareTo(key) == 0){//If it is equal, something
+				System.err.println("Something has gone wrong.");//has gone wrong.  The method
+				return 1000;									//should not reach this point
+			}
+		}
+		return i;
+	}
+	/**
+	 * 
+	 * @param key: The key that is being for
+	 * @param current: The node that is being searched
+	 * @return: The entry with the corresponding key (Or null if it is not found here)
+	 */
+	public TreeEntry findEntryInNode(K key, TreeNode current){
+		ArrayList<TreeEntry<K,V>> entries = current.getEntries();
+		int i;
+		for(i = 0; i < entries.size(); i ++){
+			if(entries.get(i).getKey().compareTo(key) == 0)//Found it!
+				return entries.get(i);
+		}
+		return null;//If the loop finishes, the entry cannot be in this node
+	}
+
+
+
+}
